@@ -8,17 +8,17 @@ import org.zerhusen.security.model.User;
 import org.zerhusen.security.service.UserService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserRestController {
 
-   private final UserService userService;
+	private final UserService userService;
 
-   public UserRestController(UserService userService) {
-      this.userService = userService;
-   }
+	public UserRestController(UserService userService) {
+		this.userService = userService;
+	}
 
-   @GetMapping("/user")
-   public ResponseEntity<User> getActualUser() {
-      return ResponseEntity.ok(userService.getUserWithAuthorities().get());
-   }
+	@GetMapping
+	public ResponseEntity<User> getActualUser() {
+		return ResponseEntity.ok(userService.getUserWithAuthorities().get());
+	}
 }
