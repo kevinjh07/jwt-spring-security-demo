@@ -1,0 +1,18 @@
+[
+  {
+    "model": "Suzuki V-Strom 650 XT ABS",
+    "category": "DUAL_SPORT"
+  },
+  {
+    "model": "Honda XR 250 Tornado",
+    "category": "TRAIL"
+  },
+  {
+    "model": "Harley Davidson Road Glide",
+    "category": "SPORT_HERITAGE"
+  },
+  {
+    "model": "Royal Enfield Himalayan",
+    "category": "TRAIL"
+  }
+]

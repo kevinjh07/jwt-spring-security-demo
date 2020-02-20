@@ -1,0 +1,1045 @@
+{
+	"info": {
+		"_postman_id": "8e4e4db1-0948-4f13-a84c-b24923aae6d4",
+		"name": "Postman Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GET /users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU4MjIzOTk3MX0.xrN08rLYe17RfW5dGj4Il74nR5M26USHRsz8LwzGNFTHvGveRMg--rlWh4IYRrxf_VxpK6gJBugIbrHIcR4egg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "POST /authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "103ddfeb-1214-431a-b1f2-6a2acc3c9b45",
+								"exec": [
+									"pm.globals.set(\"token\", pm.response.json().id_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"{{username}}\",\n\t\"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "1 - Motorcycle",
+			"item": [
+				{
+					"name": "POST /motorcycles",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"model\": \"XTZ 250 Ténéré\",\n\t\"category\": \"DUAL_SPORT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/motorcycles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /motorcycles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/motorcycles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /motorcycles/1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/motorcycles/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT/motorcycles/1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"model\": \"XT 660R\",\n\t\"category\": \"TRAIL\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/motorcycles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE/motorcycles/1",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/motorcycles/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "2 - Motorcycle (Runner)",
+			"item": [
+				{
+					"name": "POST /motorcycles (without token)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f42fa844-6295-464b-aaf4-b1e73591204b",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer test"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"model\": \"Yamaha XTZ 250 Ténéré\",\n\t\"category\": \"DUAL_SPORT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/motorcycles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "103ddfeb-1214-431a-b1f2-6a2acc3c9b45",
+								"exec": [
+									"pm.globals.set(\"token\", pm.response.json().id_token);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /motorcycles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f42fa844-6295-464b-aaf4-b1e73591204b",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"model\": \"Yamaha XTZ 250 Ténéré\",\n\t\"category\": \"DUAL_SPORT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/motorcycles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /motorcycles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f42fa844-6295-464b-aaf4-b1e73591204b",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"model\": \"Honda NX 350 Sahara\",\n\t\"category\": \"TRAIL\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/motorcycles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /motorcycles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "68831520-b2f6-4aa9-93b5-cd5e0972c07f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Returned 2 items\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.length).to.eql(2);",
+									"});",
+									"",
+									"pm.test(\"First item model is equal to Yamaha XTZ 250 Ténéré\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].model).to.eql('Yamaha XTZ 250 Ténéré');",
+									"});",
+									"",
+									"pm.test(\"First item category is equal to DUAL_SPORT\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData[0].category).to.eql('DUAL_SPORT');",
+									"});",
+									"",
+									"pm.test(\"Second item model is equal to Honda NX 350 Sahara\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1].model).to.eql('Honda NX 350 Sahara');",
+									"});",
+									"",
+									"pm.test(\"Second item category is equal to TRAIL\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData[1].category).to.eql('TRAIL');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/motorcycles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /motorcycles/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4dca6ac7-c045-40f9-bce3-4c6f2ad752b4",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Model is equal to Yamaha XTZ 250 Ténéré\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.model).to.eql('Yamaha XTZ 250 Ténéré');",
+									"});",
+									"",
+									"pm.test(\"Category is equal to DUAL_SPORT\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.category).to.eql('DUAL_SPORT');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/motorcycles/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT/motorcycles/2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6cdee4e9-5972-42bf-b515-e95651291ed5",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 2,\n\t\"model\": \"Yamaha XT 660R\",\n\t\"category\": \"TRAIL\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/motorcycles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /motorcycles/2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4dca6ac7-c045-40f9-bce3-4c6f2ad752b4",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Model is equal to Yamaha XT 660R\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.model).to.eql('Yamaha XT 660R');",
+									"});",
+									"",
+									"pm.test(\"Category is equal to TRAIL\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.category).to.eql('TRAIL');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/motorcycles/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE/motorcycles/2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e49450a1-d278-4a80-82bd-e1a295a1a749",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/motorcycles/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /motorcycles/2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4dca6ac7-c045-40f9-bce3-4c6f2ad752b4",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/motorcycles/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6ef46a05-c9cd-493a-a210-67dde8471362",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "601fc4e8-fcc9-4825-b8e4-ebcebcbc50c4",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "3 - Motorcycle (File)",
+			"item": [
+				{
+					"name": "POST /motorcycles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f42fa844-6295-464b-aaf4-b1e73591204b",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "255b098e-f5a0-42f4-aac3-2585006cc4dc",
+								"exec": [
+									"pm.globals.set(\"iteration\", ++pm.info.iteration);",
+									"pm.globals.set(\"model\", pm.iterationData.get(\"model\"));",
+									"pm.globals.set(\"category\", pm.iterationData.get(\"category\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"model\": \"{{model}}\",\n\t\"category\": \"{{category}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/motorcycles",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /motorcycles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "68831520-b2f6-4aa9-93b5-cd5e0972c07f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Model is equal to \" + pm.globals.get(\"model\"), function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.model).to.eql(pm.globals.get(\"model\"));",
+									"});",
+									"",
+									"pm.test(\"Category is equal to \" + pm.globals.get(\"category\"), function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.category).to.eql(pm.globals.get(\"category\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "200b79b1-43ab-44ff-af44-21629f07e18b",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/motorcycles/{{iteration}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"motorcycles",
+								"{{iteration}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6ef46a05-c9cd-493a-a210-67dde8471362",
+						"type": "text/javascript",
+						"exec": [
+							"pm.sendRequest({",
+							"    url: 'http://localhost:8080/api/authenticate',",
+							"    method: 'POST',",
+							"    header: {",
+							"        'Content-Type': 'application/json'",
+							"    },",
+							"    body: {",
+							"        mode: 'raw',",
+							"        raw: JSON.stringify({",
+							"        \t\"username\": \"admin\",",
+							"        \t\"password\": \"admin\"",
+							"        })",
+							"    }",
+							"}, (err, response) => {",
+							"    pm.globals.set('token', response.json().id_token)",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "601fc4e8-fcc9-4825-b8e4-ebcebcbc50c4",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "00c85115-7ac5-46d9-8bcd-e7aff4c266eb",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1bf71fd0-5485-459e-94ff-a7cda8e09d8a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "4c137d0e-a430-4860-80a1-b42bfa849dc1",
+			"key": "username",
+			"value": "admin",
+			"type": "string"
+		},
+		{
+			"id": "33d9ba1a-f79c-42d0-8ce5-1f2d36390871",
+			"key": "password",
+			"value": "admin",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
